@@ -1,0 +1,37 @@
+﻿功能域,功能项,建议状态,底板实现边界,模块/外部系统边界,关键引脚或接口,权限/能力状态,关键约束,可选实现形态,是否纳入,优先级,备注
+电源,主电源输入与3.3V模块供电,必选,底板将USB-C/DC端子两路输入防反灌汇入5V_SYS，再由LDO/低噪声后级生成AsteRx 3.3V Vin,模块只接受3.3V +/-5%，不负责宽压输入转换,30-pin Pin1/2 Vin; 所有GND,硬件必需,3.3V +/-5%; 峰值供电能力至少1A; Vin 1/2并联; GND全接,USB-C VBUS->5V_SYS; DC端子12V标称/24V容错->宽压DCDC->5V_SYS; 5V_SYS->LDO->3.3V,纳入 两路供电输入互相防反灌,P0,DC输入24V误插容错通过宽压DCDC实现，不能单靠TVS；不实现PoE供电
+电源,外围电源树,必选,底板给PHY、RS232、RS485、Event逻辑、USB/SD、LED/buffer等外围器件分电源域供电并预算电流,模块不为外围系统提供通用大电流电源,3V3_PHY; VCC_RS232; VCC_RS485; VCC_EVENT; VCC_SD; 5V_SYS等,取决于外围功能,避免外围电路通过信号脚反灌模块; RS232/RS485等IO使用不同电源芯片或独立负载开关分割电源域,各电源域独立LDO/负载开关; 必要时隔离电源,纳入 分割电源域,P0,外围电源需配合IO_EN控制输出
+电源,天线供电VANT,推荐必选,底板给30-pin VANT提供3-5.5V天线偏置源，并实现选择、滤波、限流/保护和测试点,模块把VANT送到MAIN/AUX1天线端；实际天线和线缆由外部系统负责,30-pin Pin18 VANT; MAIN/AUX1 RF连接器在模块上,双天线允许; L-band允许,3-5.5V; 每路150mA; 同一VANT供两路; 不接VANT则天线无DC,跳线选择3.3/5V; ,编码开关选择3.3/5,P0,若用有源天线，基本必须实现
+电源,复位控制,必选,底板引出nRST并提供按键、测试点或外部控制接口,模块低电平复位,30-pin Pin8 nRST,硬件支持,低有效; 内部上拉,按键+测试点;,引出，连接到按键板,P0,调试阶段非常有用
+上电/保护,IO_EN驱动隔离,必选,底板用IO_EN控制所有会驱动模块输入的buffer/收发器/OE，避免未上电或standby反灌,模块通过IO_EN表示输入可被外部驱动,60-pin Pin59 IO_EN,硬件支持,IO_EN上电/唤醒后不晚于300ms变高; standby为低,全局OE,纳入,P0,这是实现边界中的强制安全项
+时频,PPS1输出引出,推荐必选,底板将PPS1引出到外部连接器，并可加缓冲、保护、测试点,模块产生PPS1，软件配置极性/频率/脉宽,30-pin Pin12 PPS1,xPPS能力; datarate=100,LVTTL; 50ohm输出阻抗; 24mA; 默认5ms; 上电初期电平未定义,SMA,纳入,P0,定位授时产品通常必须引出
+RF/天线,MAIN天线机械引出/开孔,必选,底板和外壳为模块MAIN MMCX连接器留空间，并用MMCX到SMA转接线引到面板,GNSS RF接收在模块上完成,模块MAIN MMCX,主天线必需,RF 50ohm; 有源天线需VANT; 天线净增益15-50dB,MMCX转SMA; 面板SMA,纳入,P0,底板不经过Hirose传输GNSS RF
+机械,模块安装与接地,必选,底板提供M3安装孔、金属支柱接地、keepout和底部高度避让,模块机械尺寸固定,4x M3; 30-pin/60-pin Hirose; RF连接器,硬件必需,安装孔接地但不能替代I/O GND; 30-pin keepout至少8.8mm x 2.96mm; 底部高度限制,螺柱固定; 面板同轴; ,纳入,P0,需在PCB封装阶段锁定
+EMC/ESD,外部接口ESD保护,必选,底板对USB、RJ45、串口、Event/PPS、SD、天线供电等外部接口加ESD/浪涌保护,模块只有有限ESD保护,所有外部连接器,工程必需,保护器件寄生不能破坏高速/时频信号,TVS; 共模电感; GDT/PTC按接口选择,纳入,P0,室外天线和外部线缆尤其重要
+EMC/ESD,GNSS抗干扰布局边界,必选,底板布局避免高速数字/开关电源/排线靠近RF与天线，提供完整地和平面分区,模块可做干扰监测和缓解，但不替代硬件EMC,PCB stackup/layout,im=1; APME=1,GNSS信号极弱; 需通过C/N0和spectrum验证,4层或以上; 数字内层; 屏蔽/地过孔; 时钟避开GNSS谐波,纳入,P0,这是验收边界，不只是布局建议
+以太网,10/100M RJ45以太网,推荐,底板实现RMII PHY、带灯内置变压器RJ45、ESD和布局约束，不实现PoE,模块只提供RMII MAC侧接口和网络协议能力,60-pin RMII_TXEN/TXD0/TXD1/RXD0/RXD1/CRS_DV/RXER/CLK/MDIO/MDC,ethernet=1 Permitted,PHY和magnetics必须在底板; RMII短且参考连续地,KSZ8041参考; 兼容PHY; 普通带灯内置变压器RJ45; 可统一选型千兆RJ45但仅按10/100M使用,纳入 不实现PoE,P0/P1,RJ45选型后续统一对话；网口不作为供电输入
+时频,10MHz REF IN输入,推荐,底板提供外部10MHz输入接口，做阻抗、幅度适配、保护和启动时序说明,模块使用外部10MHz作为主频率参考,60-pin Pin60 REF IN,freqsync=1 Permitted,10MHz; 2-5Vpp; AC耦合; 约13k输入; 启动前必须存在且运行中持续存在,SMA/BNC 50ohm输入+整形/幅度适配; 直接LVTTL时钟输入,纳入,P0/P1,若系统有外部时钟基准，必须认真设计
+RF/天线,AUX1天线机械引出/开孔,推荐,底板和外壳为AUX1 MMCX连接器留空间，并用MMCX到SMA转接线引到面板,模块用AUX1支持双天线姿态/heading,模块AUX1 MMCX,nb_ant=2; attitude=2,MAIN/AUX1净增益差不超过10dB; RF 50ohm,MMCX转SMA; 面板SMA,纳入 与MAIN相同方式引出,P0/P1,双天线姿态功能需要AUX1
+电源,电源开关/待机控制,推荐,底板引出nPDN并可由按键或主控控制standby,模块内部执行standby和唤醒,30-pin Pin20 nPDN,硬件支持,低有效; 内部上拉; 命令standby后唤醒需拉低至少50ms,按键,引出，连接到按键板,P1,需要低功耗整机时纳入
+串口,COM1 LVTTL引出,可选,底板将COM1 TX/RX以3.3V TTL排针或板内接口引出，并加必要保护,模块提供LVTTL串口，协议配置由接收机软件完成,30-pin Pin9 TX1; Pin10 RX1,硬件支持,3.3V LVTTL; 空闲高; 未上电不得驱动RX,2.54排针; JST; 板内MCU连接,不需要,P1,适合调试或接MCU
+串口,COM2 LVTTL引出,推荐,底板引出COM2 TX/RX，并可同时引出RTS/CTS,模块提供COM2及硬件流控,30-pin Pin13 TX2; Pin14 RX2; 60-pin Pin11 RTS2; Pin12 CTS2,硬件支持,CTS2低表示外部准备接收,TTL排针; 板内连接,不需要,P1,COM2适合作为主数据/控制串口
+USB,USB Device外部接口,推荐,底板将USB D+/D-/VBUS引至USB连接器，并实现ESD、共模扼流圈、差分阻抗和VBUS检测,模块作为USB device通信，不通过USB_VBUS供电,30-pin Pin5 USB_D+; Pin6 USB_D-; Pin7 USB_VBUS,usb=1 Permitted,USB_VBUS 4.40-5.25V; 不能用于给模块供电; 默认USB2.0 HS,USB-C device; Micro-B; 板内USB排线,纳入,P1,若需要Web/调试/高速数据，建议纳入
+时频,PPS2输出引出,可选,底板将PPS2独立引出，可与PPS1分开配置,模块产生PPS2,30-pin Pin21 PPS2,xPPS能力,LVTTL; 50ohm输出阻抗; 24mA; 与PPS1独立配置; 上电初期未定义,SMA; BNC; 排针; 缓冲输出,引出，sma,P1,需要双PPS或不同频率/极性时纳入
+时频,EventA输入,推荐,底板将EventA通过SMA和GH1.25两种输入引出，二者经ESD/限幅/整形和OR逻辑芯片后触发同一EventA,模块对EventA做时间标记或TimeSync,30-pin Pin19 EventA,timedevent=1; timesync=1,LVTTL输入; 时间标记分辨率20ns; 保护/缓冲延迟应可控,SMA输入; GH1.25输入; OR逻辑; 5V容忍缓冲,纳入 SMA+GH1.25双输入,P1,不连接按键接口板；若用于TimeSync需评估逻辑延迟/抖动
+时频,10MHz REF OUT引出,可选,底板机械固定模块REF OUT同轴跳线到外部接口；必要时另加缓冲板级电路,模块REF OUT在板上u.FL，不在Hirose引脚,模块REF OUT u.FL,硬件支持; 默认开启,10MHz方波; 0-2.8V; 50ohm; 可由命令开关,u.FL转SMA,纳入 u.FL转SMA,P1,注意不是60-pin信号
+存储,MicroSD日志存储,推荐,底板实现MicroSD卡座、供电去耦、ESD、卡检测预留和Button/LOGLED配套,模块用1-bit SD记录日志,30-pin Pin26 SD_CLK; Pin28 SD_CMD; Pin30 SD_DAT0,logging=1 advanced,3.3V; 1-bit; SD_CLK<=33MHz; FAT32<=32GB,MicroSD卡座; 标准SD卡座; 不装仅预留焊盘,纳入 选择合适的microsd座,P1,若需要现场日志或原始数据，建议纳入
+存储,LOG Button,推荐,底板提供低有效按键/外部触点并做消抖,模块解释Button低电平为日志控制,30-pin Pin25 Button,logging=1,低有效; 需外部消抖; 低>=5s挂载/卸载,按键; 两针端子; MCU控制,引出，连接到按键板,P1,和SD功能绑定
+调试,测试点与配置跳线,推荐,底板为电源、nRST、nPDN、IO_EN、PPS、REF IN、串口等提供测试点或跳线,模块通过命令配置功能,关键电源和控制信号,工程调试需要,测试点不应引入过大寄生或天线干扰,焊盘测试点; 排针; 0R选择,不需要设计考虑,P1,首版板强烈建议多留
+串口,COM1 RS232接口,可选,底板增加RS232收发器和弯插DB9，并由IO_EN控制收发器输出,模块不输出RS232电平,TX1/RX1 + RS232 transceiver,硬件支持,DB9波特率工程上建议保守；收发器需避免反灌; 使用独立VCC_RS232电源域,弯插DB9,纳入 RS232弯插DB9,P2,若对接PC传统串口则选择
+串口,COM2 RS485接口,可选,底板为COM2增加隔离RS485收发器，可接RTS/CTS或方向控制,模块只提供LVTTL,COM2 TX/RX/RTS/CTS,硬件支持,外部收发器输出受IO_EN控制; 使用独立VCC_RS485电源域; RS485必须隔离,弯插DB9; 隔离RS485,纳入 隔离RS485弯插DB9,P2,RS485方向控制、终端电阻和偏置电阻需原理图阶段确认
+串口,COM3 LVTTL引出,可选,底板引出COM3 TX/RX到GH1.25，RTS/CTS可按需预留或不接,模块提供COM3及硬件流控,30-pin Pin15 TX3; Pin16 RX3; 60-pin Pin13 RTS3; Pin14 CTS3,硬件支持,3.3V LVTTL; 空闲高; CTS3低表示外部准备接收,GH1.25,纳入 GH1.25 LVTTL直出,P2,COM3不再做RS485
+串口,COM4 LVTTL引出,可选,底板从60-pin引出COM4 TX/RX,模块提供COM4 LVTTL，无RTS/CTS,60-pin Pin15 TX4; Pin16 RX4,硬件支持,3.3V LVTTL; 空闲高,GH1.25,纳入 GH1.25 LVTTL直出,P2,需要60-pin连接器
+时频,EventB输入,可选,底板将EventB通过SMA和GH1.25两种输入引出，二者经ESD/限幅/整形和OR逻辑芯片后触发同一EventB,模块对EventB做时间标记或TimeSync,60-pin Pin57 EventB,timedevent=1; timesync=1,LVTTL输入; 需要60-pin; 延迟需可控,SMA输入; GH1.25输入; OR逻辑; 5V容忍缓冲,纳入 SMA+GH1.25双输入,P2,不连接按键接口板
+指示,LOGLED状态灯,推荐,底板用限流电阻接LOGLED到LED或外部指示接口,模块输出LOGLED状态,30-pin Pin27 LOGLED,logging=1,最大10mA; 上电初期未定义,板载LED; 面板LED接口; 不装预留,引出，连接到按键板,P2,用于判断SD挂载和记录状态
+指示,GPLED状态灯,可选,底板用限流电阻接GPLED到LED或接口,模块按setLEDMode输出状态,30-pin Pin22 GPLED,硬件支持,最大10mA; 默认PVTLED模式; 上电初期未定义,板载LED; 面板LED接口,引出，连接到按键板,P2,可作为定位状态灯
+网络/服务,NTRIP/FTP/SFTP等网络服务支持,派生功能,底板只需保证以太网或USB网络通信链路可靠,协议栈和服务由接收机固件配置,Ethernet/USB,产品能力支持,不增加专用硬件，依赖通信接口,通过以太网; 通过USB network,不需要设计约束,P2,这是软件配置边界，不是独立硬件功能
+GPIO,GP1通用输出,可选,底板引出GP1或用作外设控制/LED,模块提供可配置通用输出,60-pin Pin9 GP1,硬件支持,LVTTL输出; 最大10mA; 启动初期三态,GH1.25; LED; 控制信号,引出 GH1.25,P3,Event功能在某些参考板上与GP1状态有关，需按最终电路复核
+GPIO,GP2通用输出,可选,底板引出GP2或用作外设控制/LED,模块提供可配置通用输出,60-pin Pin44 GP2,硬件支持,LVTTL输出; 最大10mA; 启动初期三态,GH1.25; LED; 控制信号,引出 GH1.25,P3,可做系统状态输出
+不纳入,CAN物理接口,默认不纳入,除非获得补充硬件pinout，否则底板不设计CAN物理接口,权限文件显示can=1，但当前硬件手册pinout未给出CAN引脚,未在当前30/60-pin表中确认,can=1但物理接口未确认,授权不等于当前连接器可引出,待补充资料后再定,不需要,P3,避免凭授权误画硬件
+不纳入,UHF Radio物理接口,默认不纳入,除非获得补充硬件资料，否则底板不设计UHF物理接口,权限文件显示uhf=1，但当前硬件手册pinout未给出UHF接口,未在当前30/60-pin表中确认,uhf=1但物理接口未确认,授权不等于当前连接器可引出,待补充资料后再定,不需要,P3,可能属于其他产品/扩展，不应默认实现
+不纳入,INS硬件接口/IMU融合,不纳入,底板不以INS功能为目标设计专用IMU接口,接收机权限不支持INS,无,ins=0 Not permitted,即使接IMU也不能按INS授权功能使用,不设计; 仅通用串口预留,不需要,P3,除非改采购授权

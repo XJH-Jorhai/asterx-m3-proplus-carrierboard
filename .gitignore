@@ -1,0 +1,9 @@
+# Vendor manuals and local reference PDFs are not committed to the public repo.
+asterx-m3_product_group_hardware_manual_2.5.0.pdf
+Septentrio_AsteRx-m3_ProPlus_LR.pdf
+
+# Local/editor noise
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
