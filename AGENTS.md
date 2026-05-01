@@ -28,6 +28,7 @@
 ## EasyEDA Rules
 
 - Follow the local `easyeda-schematic` skill before editing schematics.
+- Before re-reading the full EasyEDA project through API in a new conversation, check `easyeda_exports/AGENT_NETLIST_NOTES.md` and the latest exported netlist files first. Treat them as an offline cache; refresh them after schematic edits or before final connectivity claims.
 - Do not use schematic net ports. Use wires plus net labels; only GND may use the ground symbol.
 - NC pins use no-connect markers directly, without net labels.
 - Use a 0.05 inch grid. Keep wire stubs and placement aligned to that grid.
