@@ -1,0 +1,549 @@
+{
+  "generatedAt": "2026-05-02T02:25:42+08:00",
+  "source": {
+    "project": "AsteRXm3ProPlus底板",
+    "board": "底板v1",
+    "schematic": "Schematic1",
+    "exportApi": "window._EXTAPI_ROOT_.sch_ManufactureData.getNetlistFile(fileName, netlistType)",
+    "primaryNetlist": "AsteRXm3ProPlus_carrier_netlist_2026-05-02.asc",
+    "detailedNetlist": "AsteRXm3ProPlus_carrier_netlist_2026-05-02.net",
+    "auxiliaryNetlist": "AsteRXm3ProPlus_carrier_netlist_2026-05-02.enet"
+  },
+  "counts": {
+    "parts": 149,
+    "nets": 188,
+    "namedNets": 164,
+    "generatedNets": 24,
+    "partPrefixes": {
+      "U": 16,
+      "Q": 2,
+      "C": 50,
+      "R": 37,
+      "L": 8,
+      "F": 4,
+      "DC": 1,
+      "D": 11,
+      "TP": 2,
+      "J": 10,
+      "FB": 1,
+      "USB": 1,
+      "CARD": 1,
+      "DSUB": 1,
+      "TV": 2,
+      "SW": 1,
+      "P": 1
+    }
+  },
+  "largestNets": [
+    {
+      "name": "GND",
+      "pinCount": 141,
+      "pins": [
+        "U2.31",
+        "U2.30",
+        "U2.29",
+        "U2.28",
+        "U2.27",
+        "U2.26",
+        "U2.25",
+        "U2.24",
+        "U2.23",
+        "U2.19",
+        "U2.17",
+        "U2.15"
+      ]
+    },
+    {
+      "name": "PGND",
+      "pinCount": 18,
+      "pins": [
+        "USB2.25",
+        "USB2.26",
+        "USB2.27",
+        "USB2.28",
+        "CARD1.10",
+        "CARD1.11",
+        "CARD1.12",
+        "CARD1.13",
+        "J4.SHIELD0",
+        "J4.SHIELD1",
+        "DSUB1.20",
+        "DSUB1.19"
+      ]
+    },
+    {
+      "name": "5V_DC",
+      "pinCount": 13,
+      "pins": [
+        "U2.9",
+        "U4.7",
+        "L2.1",
+        "C19.2",
+        "C24.2",
+        "R5.2",
+        "C25.2",
+        "C26.2",
+        "C27.1",
+        "C28.2",
+        "R11.2",
+        "R28.1"
+      ]
+    },
+    {
+      "name": "VIN_DC_PROT",
+      "pinCount": 11,
+      "pins": [
+        "U2.22",
+        "U2.21",
+        "U2.20",
+        "U11.17",
+        "U11.18",
+        "C14.1",
+        "C16.1",
+        "C15.1",
+        "R14.2",
+        "R1.2",
+        "C7.1"
+      ]
+    },
+    {
+      "name": "5V_SYS",
+      "pinCount": 9,
+      "pins": [
+        "U4.1",
+        "U4.8",
+        "U14.1",
+        "C9.2",
+        "C10.1",
+        "C13.1",
+        "U17.2",
+        "L4.1",
+        "L6.1"
+      ]
+    },
+    {
+      "name": "$8N341",
+      "pinCount": 9,
+      "pins": [
+        "U5.15",
+        "U5.16",
+        "U5.17",
+        "U17.1",
+        "C45.2",
+        "C46.2",
+        "C47.2",
+        "R34.1",
+        "R36.2"
+      ]
+    },
+    {
+      "name": "VIN_DC_IN",
+      "pinCount": 8,
+      "pins": [
+        "Q1.3",
+        "Q1.1",
+        "Q1.2",
+        "C8.2",
+        "Q2.2",
+        "U11.5",
+        "R12.2",
+        "L1.4"
+      ]
+    },
+    {
+      "name": "3V3_PHY",
+      "pinCount": 8,
+      "pins": [
+        "U6.3",
+        "U6.17",
+        "J4.13",
+        "J4.12",
+        "J4.P1",
+        "J4.P10",
+        "C23.1",
+        "D_ETH1.5"
+      ]
+    },
+    {
+      "name": "$8N236",
+      "pinCount": 7,
+      "pins": [
+        "U2.5",
+        "U2.4",
+        "U2.3",
+        "U2.2",
+        "U2.1",
+        "L2.2",
+        "C17.2"
+      ]
+    },
+    {
+      "name": "$8N202",
+      "pinCount": 7,
+      "pins": [
+        "Q1.8",
+        "Q1.7",
+        "Q1.6",
+        "Q1.5",
+        "Q1.9",
+        "U11.1",
+        "U11.2"
+      ]
+    },
+    {
+      "name": "5V_USB_PROT",
+      "pinCount": 6,
+      "pins": [
+        "U4.2",
+        "U13.6",
+        "R19.1",
+        "C6.1",
+        "R33.1",
+        "C37.1"
+      ]
+    },
+    {
+      "name": "3.3V_SYS",
+      "pinCount": 6,
+      "pins": [
+        "U5.19",
+        "U5.20",
+        "C53.1",
+        "C54.1",
+        "C55.1",
+        "C56.2"
+      ]
+    },
+    {
+      "name": "$8N279",
+      "pinCount": 5,
+      "pins": [
+        "U13.5",
+        "R7.2",
+        "C5.2",
+        "U3.1",
+        "F2.2"
+      ]
+    },
+    {
+      "name": "USB_VBUS_RAW",
+      "pinCount": 5,
+      "pins": [
+        "F2.1",
+        "USB2.A4",
+        "USB2.A9",
+        "USB2.B4",
+        "USB2.B9"
+      ]
+    },
+    {
+      "name": "$8N348",
+      "pinCount": 5,
+      "pins": [
+        "U16.1",
+        "L4.2",
+        "R35.1",
+        "C51.1",
+        "C52.1"
+      ]
+    }
+  ],
+  "importantNets": [
+    {
+      "name": "GND",
+      "pinCount": 141,
+      "pins": [
+        "U2.31",
+        "U2.30",
+        "U2.29",
+        "U2.28",
+        "U2.27",
+        "U2.26",
+        "U2.25",
+        "U2.24",
+        "U2.23",
+        "U2.19",
+        "U2.17",
+        "U2.15",
+        "U2.14",
+        "U2.13",
+        "U2.7",
+        "U4.12",
+        "U5.8",
+        "U5.18",
+        "U5.21",
+        "C8.1"
+      ]
+    },
+    {
+      "name": "PGND",
+      "pinCount": 18,
+      "pins": [
+        "USB2.25",
+        "USB2.26",
+        "USB2.27",
+        "USB2.28",
+        "CARD1.10",
+        "CARD1.11",
+        "CARD1.12",
+        "CARD1.13",
+        "J4.SHIELD0",
+        "J4.SHIELD1",
+        "DSUB1.20",
+        "DSUB1.19",
+        "DSUB1.22",
+        "DSUB1.21",
+        "TV1.2",
+        "TV2.2",
+        "U1.9",
+        "U1.10"
+      ]
+    },
+    {
+      "name": "I/O_GND",
+      "missing": true
+    },
+    {
+      "name": "CHASSIS",
+      "missing": true
+    },
+    {
+      "name": "5V_SYS",
+      "pinCount": 9,
+      "pins": [
+        "U4.1",
+        "U4.8",
+        "U14.1",
+        "C9.2",
+        "C10.1",
+        "C13.1",
+        "U17.2",
+        "L4.1",
+        "L6.1"
+      ]
+    },
+    {
+      "name": "5V_DC",
+      "pinCount": 13,
+      "pins": [
+        "U2.9",
+        "U4.7",
+        "L2.1",
+        "C19.2",
+        "C24.2",
+        "R5.2",
+        "C25.2",
+        "C26.2",
+        "C27.1",
+        "C28.2",
+        "R11.2",
+        "R28.1",
+        "C38.2"
+      ]
+    },
+    {
+      "name": "5V_USB_PROT",
+      "pinCount": 6,
+      "pins": [
+        "U4.2",
+        "U13.6",
+        "R19.1",
+        "C6.1",
+        "R33.1",
+        "C37.1"
+      ]
+    },
+    {
+      "name": "3V3_ASTERX",
+      "pinCount": 3,
+      "pins": [
+        "J30.1",
+        "J30.2",
+        "FB1.1"
+      ]
+    },
+    {
+      "name": "4.2V_ANT",
+      "pinCount": 3,
+      "pins": [
+        "U16.5",
+        "C49.1",
+        "C50.1"
+      ]
+    },
+    {
+      "name": "VANT",
+      "pinCount": 1,
+      "pins": [
+        "J30.18"
+      ]
+    },
+    {
+      "name": "USB_DP",
+      "pinCount": 2,
+      "pins": [
+        "J30.5",
+        "L3.6"
+      ]
+    },
+    {
+      "name": "USB_DN",
+      "pinCount": 2,
+      "pins": [
+        "J30.6",
+        "L3.5"
+      ]
+    },
+    {
+      "name": "USB_VBUS_RAW",
+      "pinCount": 5,
+      "pins": [
+        "F2.1",
+        "USB2.A4",
+        "USB2.A9",
+        "USB2.B4",
+        "USB2.B9"
+      ]
+    },
+    {
+      "name": "ETH_TXP",
+      "pinCount": 4,
+      "pins": [
+        "U6.7",
+        "J4.P2",
+        "R20.1",
+        "D_ETH1.1"
+      ]
+    },
+    {
+      "name": "ETH_TXN",
+      "pinCount": 4,
+      "pins": [
+        "U6.6",
+        "J4.P3",
+        "R21.1",
+        "D_ETH1.6"
+      ]
+    },
+    {
+      "name": "ETH_RXP",
+      "pinCount": 4,
+      "pins": [
+        "U6.5",
+        "J4.P4",
+        "R22.1",
+        "D_ETH1.3"
+      ]
+    },
+    {
+      "name": "ETH_RXN",
+      "pinCount": 4,
+      "pins": [
+        "U6.4",
+        "J4.P7",
+        "R23.1",
+        "D_ETH1.4"
+      ]
+    },
+    {
+      "name": "PPS1",
+      "pinCount": 1,
+      "pins": [
+        "J30.12"
+      ]
+    },
+    {
+      "name": "PPS2",
+      "pinCount": 1,
+      "pins": [
+        "J30.21"
+      ]
+    },
+    {
+      "name": "REF_IN",
+      "missing": true
+    },
+    {
+      "name": "REF_OUT",
+      "missing": true
+    },
+    {
+      "name": "TX1",
+      "pinCount": 2,
+      "pins": [
+        "J30.9",
+        "U20.3"
+      ]
+    },
+    {
+      "name": "RX1",
+      "pinCount": 2,
+      "pins": [
+        "J30.10",
+        "U20.4"
+      ]
+    },
+    {
+      "name": "TX2",
+      "pinCount": 2,
+      "pins": [
+        "J30.13",
+        "U19.3"
+      ]
+    },
+    {
+      "name": "RX2",
+      "pinCount": 2,
+      "pins": [
+        "J30.14",
+        "U19.4"
+      ]
+    },
+    {
+      "name": "RS485_A_DB9",
+      "pinCount": 5,
+      "pins": [
+        "D5.1",
+        "DSUB1.10",
+        "L5.3",
+        "TV2.1",
+        "SW1.6"
+      ]
+    },
+    {
+      "name": "RS485_B_DB9",
+      "pinCount": 5,
+      "pins": [
+        "D5.2",
+        "DSUB1.11",
+        "L5.2",
+        "TV2.3",
+        "R31.1"
+      ]
+    },
+    {
+      "name": "RS232_RXD_DB9",
+      "pinCount": 3,
+      "pins": [
+        "DSUB1.2",
+        "F4.2",
+        "TV1.3"
+      ]
+    },
+    {
+      "name": "RS232_TXD_DB9",
+      "pinCount": 3,
+      "pins": [
+        "DSUB1.3",
+        "F3.2",
+        "TV1.1"
+      ]
+    }
+  ],
+  "agentNotes": [
+    "Use the PADS .asc file as the primary offline connectivity source; it contains full parts and nets in this export.",
+    "Use the Protel2 .net file when component properties or verbose per-part metadata are needed.",
+    "The JLCEDA .enet file is kept as an auxiliary EasyEDA export, but do not rely on JSON.parse alone; this snapshot parsed as incomplete for components in the bridge workflow.",
+    "Refresh these files after schematic edits before making final connectivity claims."
+  ]
+}
